@@ -5,6 +5,7 @@ import * as Font from 'expo-font';
 import MainStack from './src/navigations/main';
 import { FontDisplay } from './src/constants/font';
 import { globalReducer } from './src/utils/store/reducers';
+import AppLoading from 'expo-app-loading';
 
 const initialState = {
   errors: {},
@@ -40,7 +41,11 @@ export default function App() {
     }
   }, []);
 
-  if(state.loading) return null;
+  if (state.loading) {
+    return (
+      <AppLoading />
+    );
+  }
 
   return (
     <NavigationContainer>
