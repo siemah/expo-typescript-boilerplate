@@ -17,16 +17,28 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dropzik.app",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.dropzik.app",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "config": {
+        "firebase": {
+          "appId": "1:512639412510:web:31ee91b27106cd78dfc10f",
+          "apiKey": "AIzaSyDSwIjziRVGsG1c_vLSxEt0xr3rAeacSYA",
+          "projectId": "dropzik-mobile-app",
+          "measurementId": "G-N81DMP0LG1"
+        }
+      }
     }
   }
 }
