@@ -39,6 +39,21 @@
           "measurementId": "G-N81DMP0LG1"
         }
       }
+    },
+    "plugins": [
+      "sentry-expo"
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "dayenio",
+            "project": "dropzik-mobile-app",
+            "authToken": "3e58f235e8744b4ea7d3f4fbf62d6715457f77a2af614be38c09aad4fdcc2c8f"
+          }
+        }
+      ]
     }
   }
 }
