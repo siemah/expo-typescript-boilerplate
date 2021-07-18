@@ -9,6 +9,8 @@ import { globalReducer } from './src/utils/store/reducers';
 import AppLoading from 'expo-app-loading';
 import AppAnalytic from './src/utils/analytics';
 import ENV_VARS from './src/constants/env';
+import ErrorBoundary from './src/libs/error-boundary';
+import { View } from 'react-native';
 
 Sentry.init({
   dsn: ENV_VARS.sentry.dsn,
@@ -74,12 +76,14 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      onReady={_onReady}
-      onStateChange={_onStateChange}
-    >
-      <MainStack />
-    </NavigationContainer>
+    <ErrorBoundary>
+      <NavigationContainer
+        ref={navigationRef}
+        onReady={_onReady}
+        onStateChange={_onStateChange}
+      >
+        <MainStack />
+      </NavigationContainer>
+    </ErrorBoundary>
   );
 }
