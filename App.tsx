@@ -1,12 +1,20 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
+import * as Sentry from 'sentry-expo';
 
 import MainStack from './src/navigations/main';
 import { FontDisplay } from './src/constants/font';
 import { globalReducer } from './src/utils/store/reducers';
 import AppLoading from 'expo-app-loading';
 import AppAnalytic from './src/utils/analytics';
+import ENV_VARS from './src/constants/env';
+
+Sentry.init({
+  dsn: ENV_VARS.sentry.dsn,
+  enableInExpoDevelopment: true,
+  debug: false,
+});
 
 const initialState = {
   errors: {},
