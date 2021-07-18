@@ -16,7 +16,6 @@ export default class AppAnalytic {
    * @see https://docs.expo.io/versions/latest/sdk/firebase-analytics/#setcurrentscreen
    */
   static setCurrentScreen(currentRouteName: string, screenClassOverride?: string) {
-    console.log(`current screen: ${currentRouteName}`)
     return Analytics.setCurrentScreen(currentRouteName, screenClassOverride);
   }
 
