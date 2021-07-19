@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer, useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import * as Sentry from 'sentry-expo';
+import * as Linking from 'expo-linking';
 
 import { FontDisplay } from '@local/constants/font';
 import { globalReducer } from '@local/utils/store/reducers';
@@ -10,13 +11,14 @@ import AppAnalytic from '@local/utils/analytics';
 import ENV_VARS from '@local/constants/env';
 import ErrorBoundary from '@local/libs/error-boundary';
 import MainStack from '@local/navigations/main';
+import { navigationContainerLinking } from '@local/config/navigation';
 
 Sentry.init({
   dsn: ENV_VARS.sentry.dsn,
   enableInExpoDevelopment: true,
   debug: false,
 });
-
+const prefix = Linking.createURL("/");
 const initialState = {
   errors: {},
   loading: true,
@@ -41,6 +43,30 @@ export default function App() {
 
     routeNameRef.current = currentRouteName;
   }
+  const getInitialURL = async () => {
+    let url: string | null | undefined;
+    // todo: handle link from push notification
+    url = await Linking.getInitialURL();
+    if (url != null) {
+      return url;
+    }
+
+    return undefined;
+  }
+  const subscribe = (listener: any) => {
+    const onReceiveURL = ({ url }: { url: string }) => listener(url);
+    Linking.addEventListener('url', onReceiveURL);
+
+    return () => {
+      Linking.removeEventListener('url', onReceiveURL);
+    };
+  }
+  const linking: LinkingOptions = {
+    ...navigationContainerLinking,
+    prefixes: [prefix, ...navigationContainerLinking.prefixes],
+    getInitialURL,
+    subscribe,
+  };
 
   useEffect(() => {
     const loadAssetsAndInitialData = async () => {
@@ -80,6 +106,7 @@ export default function App() {
         ref={navigationRef}
         onReady={_onReady}
         onStateChange={_onStateChange}
+        linking={linking}
       >
         <MainStack />
       </NavigationContainer>
