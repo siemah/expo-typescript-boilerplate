@@ -3,14 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import * as Sentry from 'sentry-expo';
 
-import MainStack from './src/navigations/main';
-import { FontDisplay } from './src/constants/font';
-import { globalReducer } from './src/utils/store/reducers';
+import { FontDisplay } from '@local/constants/font';
+import { globalReducer } from '@local/utils/store/reducers';
 import AppLoading from 'expo-app-loading';
-import AppAnalytic from './src/utils/analytics';
-import ENV_VARS from './src/constants/env';
-import ErrorBoundary from './src/libs/error-boundary';
-import { View } from 'react-native';
+import AppAnalytic from '@local/utils/analytics';
+import ENV_VARS from '@local/constants/env';
+import ErrorBoundary from '@local/libs/error-boundary';
+import MainStack from '@local/navigations/main';
 
 Sentry.init({
   dsn: ENV_VARS.sentry.dsn,

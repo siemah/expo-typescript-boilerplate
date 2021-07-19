@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Signin from '../screens/signin';
-import Home from '../screens/home';
-import { MainStackNavigatorParamsType } from '../types/navigations';
+import Signin from '@local/screens/signin';
+import Home from '@local/screens/home';
+import { MainStackNavigatorParamsType } from '@local/types/navigations';
 
 const Stack = createStackNavigator<MainStackNavigatorParamsType>();
 
